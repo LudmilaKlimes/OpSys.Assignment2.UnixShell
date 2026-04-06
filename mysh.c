@@ -5,7 +5,6 @@
 // Date: 04/03/26
 
 // mysh - a simple Unix shell
-// Note: Im sorry for the messy code! 
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -149,7 +148,7 @@ int main (void) {
 
         for (int i = 0; i < arg_count; i++) { // Loop through the tokens
             if (args[i] == NULL) {
-                continue; // (trying to fix a timeout issue in the autograder)
+                continue; // fixing timeout issue by continuing when a Null argument is encountered
             }
             if (strcmp(args[i], ">") == 0) { // If  ">" 
                 outfilename = args[i+1]; // Get the filename that follows
@@ -190,7 +189,7 @@ int main (void) {
             exit(1); // Exit the child process
         } else if (pid > 0) { // Parent process(wait)
             if (!backgroundprocess) { // If not a background command
-                waitpid(pid, NULL, 0); // Wait for the child (lol)
+                waitpid(pid, NULL, 0); // Wait for the child 
             } else { // If background command
                 printf("Background process PID: %d\n", pid); // Print prompt
             }
@@ -199,9 +198,9 @@ int main (void) {
             continue; // Continue to the next iteration of the loop
         }
 
-        
-        // Testing:
         /* 
+        Tests Used as the shell was being built:
+        
         // Echo the input back to the user
         printf("You entered: %s\n", line);
 
@@ -209,10 +208,6 @@ int main (void) {
         for (int i = 0; i < arg_count; i++) {
              printf("Token %d: %s\n", i, args[i]);
         }
-
-        gcc -o mysh mysh.c
-        ./mysh
-        ./hw2_grader
         */
     }
     return 0;
